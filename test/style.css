@@ -51,12 +51,12 @@ body {
 
 .active {
     /* background-color: #8196b8; */
-    background-color: salmon;
-    border: 2px dotted teal;
-    font-size: 40%;
+    /* background-color: salmon; */
+    /* border: 2px dotted teal; */
+    font-size: 80%;
     font-family: futura;
     text-align: center;
-    color: maroon;
+    color: white;
     margin: 0;
 
     /* color: black; */
