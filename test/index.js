@@ -1,4 +1,4 @@
-const board = document.querySelector('.board')
+const board = document.querySelector('#board')
 const cellWrap = document.querySelector('.cell-wrap')
 
 
@@ -6,9 +6,9 @@ const cellWrap = document.querySelector('.cell-wrap')
 function createBoard(size) {
     
     for (let i = 0; i<size*size; i++) {
-        const test = document.createElement('div')
-        test.classList.add('cell')
-        cellWrap.appendChild(test)
+        const cell = document.createElement('div')
+        cell.classList.add('cell')
+        cellWrap.appendChild(cell)
         // board.style.gridTemplateColumns = `repeat(${size}, auto)`
         cellWrap.style.gridTemplateColumns = `repeat(${size}, auto)`
         cellWrap.style.width = `${39*size}px`
@@ -21,22 +21,6 @@ function createBoard(size) {
 
 createBoard(15);
 
-
-
-
-// function clickAttacher(selector, cn) {
-//     const elem = document.querySelectorAll(selector);
-  
-//     for (const e of elem) {
-//       e.addEventListener('click', () => {
-//         e.classList.toggle(cn)
-//         // e.textContent = '*'
-//         console.log(elem[1])
-//       });
-//     }
-//   }
-
-// clickAttacher('.cell', 'active')
 
 
 
@@ -58,7 +42,7 @@ createBoard(15);
 // test('.cell', 'active', 'triple word score')
 
 
-// let cellIdx = {
+// let cellIdx2 = {
 //   'ct': [112,],
 //   'tw': [0, 7, 105],
 //   'tl': [20, 76, 80],
@@ -104,3 +88,14 @@ premiumCells('.cell', 'premium', 'DW', cellIdx.dw, 'salmon')
 //   }
 // }
 
+function clickAttacher(selector, cn) {
+    const elem = document.querySelectorAll(selector);
+  
+    for (const e of elem) {
+      e.addEventListener('click', () => {
+        e.classList.toggle(cn)
+      });
+    }
+  }
+
+clickAttacher('.cell', 'active')
