@@ -1,27 +1,7 @@
 const board = document.querySelector('#board')
 const cellWrap = document.querySelector('.cell-wrap')
 
-
-
-// function createBoard(size) {
-    
-//     for (let i = 0; i<size*size; i++) {
-//         const cell = document.createElement('div')
-//         cell.classList.add('cell')
-//         cellWrap.appendChild(cell)
-//         // board.style.gridTemplateColumns = `repeat(${size}, auto)`
-//         cellWrap.style.gridTemplateColumns = `repeat(${size}, auto)`
-//         cellWrap.style.width = `${39*size}px`
-//         cellWrap.style.height = `${39*size}px`
-//         }
-
-
-
-// }
-
-// createBoard(15);
-
-
+// 
 
 const boardCoords = [
     4,0,0,1,0,0,0,4,0,0,0,1,0,0,4,
@@ -40,32 +20,31 @@ const boardCoords = [
     0,3,0,0,0,2,0,0,0,2,0,0,0,3,0,
     4,0,0,1,0,0,0,4,0,0,0,1,0,0,4,
 ]
-const cellBonusMap={
-  0: {
-      "value": "",
-      "color": "white"
-  },
+
+
+
+const premiumObj = {
   1: {
-      "value": "DLS",
-      "color": "lightblue"
+    name: 'DL',
+    color: '#5c77a1'
   },
   2: {
-      "value": "TLS",
-      "color": "purple"
+    name: 'TL',
+    color: '#023785'
   },
   3: {
-      "value": "DWS",
-      "color": "pink"
+    name: 'DW',
+    color: 'SALMON'
   },
   4: {
-      "value": "TWS",
-      "color": "#a9687d"
+    name: 'TW',
+    color: '#a9687d'
   },
   5: {
-    "value": "DWS",
-    "color": "pink"
+    name: '⭑',
+    color: '#a9687d'
   },
-};
+}
 
 function create(size) {
   for (let i = 0; i<size*size; i++) {
@@ -76,31 +55,26 @@ function create(size) {
     cellWrap.style.width = `${39*size}px`
     cellWrap.style.height = `${39*size}px`
   }
+
   function premiumStyles() {
     const cell = document.querySelectorAll('.cell')
 
-    for (let i = 0; i<225; i++) {
-        if (boardCoords[i] !== 0) {
-        cell[i].classList.add('premium')
-      } if (boardCoords[i] === 4) {
-        cell[i].style.backgroundColor = '#a9687d'
-        cell[i].textContent = 'TW'
-      } if (boardCoords[i] === 3) {
-        cell[i].style.backgroundColor = 'SALMON'
-        cell[i].textContent = 'DW'
-      } if (boardCoords[i] === 2) {
-        cell[i].style.backgroundColor = '#023785'
-        cell[i].textContent = 'TL'
-      } if (boardCoords[i] === 1) {
-        cell[i].style.backgroundColor = '#5c77a1'
-        cell[i].textContent = 'DL'
-      } if (boardCoords[i] === 5) {
-        cell[i].style.backgroundColor = '#a9687d'
-        cell[i].textContent = '⭑'
-      }
+      for (let i=0; i<225; i++) {
+        for (const key in premiumObj) {
+          if (boardCoords[i] !== 0) {
+            cell[i].classList.add('premium')
+          } if (boardCoords[i] == key) {
+            cell[i].style.backgroundColor = premiumObj[key].color
+            cell[i].textContent = premiumObj[key].name
+
+            // console.log(`i: ${i}, key: ${key}, 
+            // board name: ${boardCoords[i]}, ${premiumObj[key].name}`);
+          }
+        }
+      };
   }
-}
-premiumStyles();
+
+  premiumStyles();
 
 };
 
@@ -110,21 +84,7 @@ create(15);
 
 
 
-// function test(selector, cn, text) {
-//     const elem = document.querySelectorAll(selector);
-//     for (let i = 0; i<15; i+=7) {
-//         // const elem = document.querySelectorAll(selector);
-//         elem[i].classList.add(cn)
-//         elem[i].textContent = text.toUpperCase();
-//         // i+=9-3
-//         }
-//         elem[112].classList.add(cn)
-//         elem[112].textContent = '⭑'
-//         elem[112].style.fontSize = '100%'
 
-// }
-
-// test('.cell', 'active', 'triple word score')
 
 
 // let cellIdx2 = {
@@ -165,7 +125,6 @@ create(15);
 
 function clickAttacher(selector, cn) {
     const elem = document.querySelectorAll(selector);
-  
     for (const e of elem) {
       e.addEventListener('click', () => {
         e.classList.toggle(cn)
