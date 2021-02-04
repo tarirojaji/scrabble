@@ -3,6 +3,7 @@
   margin: 0;
   box-sizing: border-box;
   font-family: futura;
+  background-color: #1c1f24;
 }
 
 
@@ -14,10 +15,10 @@
   align-content: center;
   justify-items: center;
   align-items: center;
+  position: relative;
+  top: -40px;
   /* grid-template-columns: repeat(4, auto) */
   /* extra */
-  background-color: #1c1f24;
-  /* grid-template-columns: 50px 70%; */
 
 }
 
@@ -30,6 +31,7 @@
     align-content: center;
     justify-items: center;
     align-items: center;
+
     /* position: relative; */
     /* extra */
     background-color: #232d3e;
