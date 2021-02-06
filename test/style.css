@@ -35,9 +35,14 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5em;
+  font-size: 2.5em;
 
-  background-color: teal;
+  color: white;
+  -webkit-text-fill-color: black; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+
+  /* background-color: teal; */
 }
 
 .board {
@@ -45,7 +50,7 @@ header {
   justify-content: center;
   width: 500px;
 
-  background-color: greenyellow;
+  /* background-color: greenyellow; */
   display: grid;
   /* justify-content: center; */
   /* align-content: center; */
@@ -65,17 +70,17 @@ header {
 
 
 .cell-wrap {
-    /* width: 45px; */
-    /* height: 45px; */
+    width: max-content;
+    height: max-content;
     display: grid;
-    justify-content: center;
+    /* justify-content: center; */
     /* align-content: center; */
     /* justify-items: center; */
     /* align-items: center; */
     /* position: relative; */
 
     background-color: #232d3e;
-    border: 6px solid #404855;
+    border: 4px solid #232d3e;
     border-radius: 1%;
 
     margin: 1em auto;
@@ -85,9 +90,11 @@ header {
   width: 25px;
   height: 25px;
   /* border: 1px solid #343d4c; */
-  display: flex;
+  /* display: flex; use display grid? or flex */
+  display: grid;
   justify-content: center;
-  align-items: center;
+  align-content: center;
+  /* align-items: center; */
   position: relative;
   cursor: pointer;
   /* extra */
@@ -113,29 +120,38 @@ header {
 .slot-wrap {
   display: flex;
   justify-content: center;
-  /* background-color: #232d3e; */
+  background-color: seagreen;
   /* border: 3px dotted #404855; */
   /* border-radius: 5px; */
 
 }
 
 .slot {
-  width: 45px;
-  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  /* width: 45px;
+  height: 45px; */
+  width: 25px;
+  height: 25px;
   margin: 0.1em;
   cursor: pointer;
+  font-size: 1.5em;
 
-  border: 2px solid #404855;
+  border: 2px solid greenyellow;
   border-radius: 15%;
-  background-color: #151B25;
+  background-color: forestgreen;
 
 }
 
 .btn-wrap {
   display: flex;
   justify-content: center;
+  background-color: slateblue;
 }
 
+/* make width of set btn static esp  */
 button {
   font-size: 1.5em;
   /* font-weight: bold; */
@@ -143,7 +159,7 @@ button {
   margin: 0.5em;
   padding: 0 0.5em;
   background-color: #151B25;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   color: white;
 }
 
