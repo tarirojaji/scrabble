@@ -1,4 +1,5 @@
 // Board coordinates for normal & premium cells
+// Coordinates found at https://codegolf.stackexchange.com/a/92062
 const cellPos = [
     4,0,0,1,0,0,0,4,0,0,0,1,0,0,4,
     0,3,0,0,0,2,0,0,0,2,0,0,0,3,0,

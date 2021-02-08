@@ -1,4 +1,4 @@
-import { cellPos, premiumObj } from './modules/boardPos.js';
+import { cellPos, premiumObj } from './modules/cellPos.js';
 // import { dragStartHandler } from './modules/drag.js';
 
 
