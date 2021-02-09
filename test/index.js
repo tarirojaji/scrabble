@@ -1,4 +1,5 @@
 import { cellPos, premiumObj } from './modules/cellPos.js';
+import { letters } from './modules/letters.js'
 // import { dragStartHandler } from './modules/drag.js';
 
 
@@ -7,25 +8,33 @@ const board = document.querySelector('#board'); //currently not in use
 const cellWrap = document.querySelector('.cell-wrap');
 const slotWrap = document.querySelector('.slot-wrap');
 const boardSize = 15;
+const numTiles = 7;
 
 
 // array of letters for testing
 let arr = ['D','I','O','J','O','J','O']
+let ltr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 
 
 // 
 
 function createBoard(size) {
-  for (let i = 0; i<size*size; i++) {
-  const div = document.createElement('div')
-    div.classList.add('cell', 'dropzone')
-    cellWrap.appendChild(div)
-    cellWrap.style.gridTemplateColumns = `repeat(${size}, auto)`
-    // NOTE: Loop & rename ID to eg. 00,01,02,etc or a1,a2...d5,d6,etc.
-    div.id = `cl${i}`
-    // cellWrap.style.width = `${29*size}px`
-    // cellWrap.style.height = `${29*size}px`
-  };
+  for (let i = 0; i<size; i++) {
+    for (let j=0; j<size; j++) {
+      const div = document.createElement('div')
+      div.classList.add('cell', 'dropzone')
+      div.setAttribute('data-row', i);
+      div.setAttribute('data-col', j);
+      div.id = `${i}${j}`
+      cellWrap.appendChild(div)
+      cellWrap.style.gridTemplateColumns = `repeat(${size}, auto)`
+      // NOTE: Loop & rename ID to eg. 00,01,02,etc or a1,a2...d5,d6,etc.
+      // div.id = `cl${i}`
+      // cellWrap.style.width = `${29*size}px`
+      // cellWrap.style.height = `${29*size}px`
+    };
+  }
 
 
   function premiumStyles() {
@@ -38,6 +47,7 @@ function createBoard(size) {
           } if (cellPos[i] == key) {
             cell[i].style.backgroundColor = premiumObj[key].color
             cell[i].textContent = premiumObj[key].name
+            cell[i].classList.add(premiumObj[key].name)
 
             // console.log(`i: ${i}, key: ${key}, 
             // board name: ${cellPos[i]}, ${premiumObj[key].name}`);
@@ -56,7 +66,8 @@ function createBoard(size) {
         slot.id = `cl${i+size*size}`
         slotWrap.appendChild(slot)
         slot.setAttribute('draggable', true)
-        slot.textContent = arr[i]
+        const randomLtr = ltr[Math.floor(Math.random() * ltr.length)]
+        slot.textContent = randomLtr
         // slotWrap.style.gridTemplateColumns = `repeat(${size}, auto)`
         // slotWrap.style.width = `${29*size}px`
         // slotWrap.style.height = `${29*size}px`
@@ -70,6 +81,10 @@ function createBoard(size) {
 
 
 createBoard(boardSize);
+
+
+
+
 
 
 
@@ -165,6 +180,11 @@ function dragOverHandler(e) {
 function dropHandler(e) {
   const data = e.dataTransfer.getData('text/plain');
   const dragged = document.getElementById(data);
+  // dragged.style.position = 'absolute'
+  // dragged.style.right = `${0}px`
+  dragged.style.opacity = `${80}%`
+
+
   e.currentTarget.append(dragged);
 }
 
