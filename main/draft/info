@@ -110,3 +110,8 @@ function shuffleClick() {
   });
 };
 shuffleClick();
+
+
+
+board loop adapted from
+https://stackoverflow.com/a/48955064
