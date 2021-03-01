@@ -1,4 +1,5 @@
 import { cellPos, premiumObj } from './modules/cellPos.js';
+// import { cellPos, premiumObj } from 'scrabble/main/modules/cellPos.js';
 // import { dragStartHandler } from './modules/drag.js';
 
 
