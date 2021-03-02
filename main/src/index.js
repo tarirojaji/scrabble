@@ -27,6 +27,8 @@ function createBoard(size) {
       div.id = `${i}${j}`;
       cellWrap.appendChild(div);
       cellWrap.style.gridTemplateColumns = `repeat(${size}, auto)`;
+
+      // div.style.position = 'absolute'
       // NOTE: Loop & rename ID to eg. 00,01,02,etc or a1,a2...d5,d6,etc.
       // div.id = `cl${i}`
       // cellWrap.style.width = `${29*size}px`
@@ -52,6 +54,14 @@ function createBoard(size) {
         }
       }
     }
+
+    // for (let i = 0; i < size * size; i++) {
+    //   if(cellPos[i] !== 0) {
+    //   cell[i].textContent = cellPos[i]
+    //   cell[i].textContent
+    //   }
+    // }
+
   }
 
   premiumStyles();
@@ -97,6 +107,7 @@ clickAttacher('.slot', 'active');
 function startClick() {
   const btnStart = document.querySelector('.btnStart');
   const slot = document.querySelectorAll('.slot');
+  // const slotWrap = document.querySelector('.slot-wrap');
 
   for (const s of slot) {
     btnStart.addEventListener('click', () => {
@@ -105,29 +116,56 @@ function startClick() {
       console.log('clicked');
     });
   }
+
+
+    // btnStart.addEventListener('click', () => {
+    //   btnStart.textContent = 'SET';
+    //   slotWrap.style.visibility = 'visible';
+    //   console.log('clicked');
+    // });
+
 }
 
 startClick();
 
 
-// function shuffleClick() {
-//   const btnShuffle = document.querySelector('.btnShuffle');
-//   const slot = document.querySelectorAll('.slot');
+function shuffleClick() {
+  const btnShuffle = document.querySelector('#btnShuffle');
+  const slot = document.querySelectorAll('.slot');
 
-//   for (const s of slot) {
-//     btnShuffle.addEventListener('click', () => {
-//       for (let i = array.length - 1; i > 0; i--) {
-//         const j = Math.floor(Math.random() * (i + 1));
-//         [array[i], array[j]] = [array[j], array[i]];
-//         s.textContent = arr[i]
-//     }
 
-//     });
-//   }
+  btnShuffle.addEventListener('click', () => {
+    for (const s of slot) {
+      const randomLtr = ltr[Math.floor(Math.random() * ltr.length)];
+      s.textContent = randomLtr;
+        console.log('clicked')
+      }
+    });
 
-// }
+  // btnShuffle.addEventListener('click', () => {
+  //   for (const s of slot) {
+  //     for (let i = arr.length - 1; i > 0; i--) {
+  //       const j = Math.floor(Math.random() * (i + 1));
+  //       [arr[i], arr[j]] = [arr[j], arr[i]];
+  //       s.textContent = arr[i]
+  //       console.log('clicked')
+  //     }
+  //   }
+  // });
 
-// shuffleClick();
+  // for (const s of slot) {
+  //   btnShuffle.addEventListener('click', () => {
+  //     for (let i = array.length - 1; i > 0; i--) {
+  //       const j = Math.floor(Math.random() * (i + 1));
+  //       [array[i], array[j]] = [array[j], array[i]];
+  //       s.textContent = arr[i]
+  //   }
+  //   });
+  // }
+
+}
+
+shuffleClick();
 
 
 function dragStartHandler(e) {
@@ -142,12 +180,14 @@ function dragOverHandler(e) {
 function dropHandler(e) {
   const data = e.dataTransfer.getData('text/plain');
   const dragged = document.getElementById(data);
-  // dragged.style.position = 'absolute'
   // dragged.style.right = `${0}px`
   dragged.style.opacity = `${80}%`;
 
 
   e.currentTarget.append(dragged);
+  dragged.style.position = 'absolute'
+
+
 }
 
 const dropzones = document.querySelectorAll('.dropzone');
