@@ -1,4 +1,4 @@
-import { cellPos, premiumObj } from './modules/cellPos.js';
+import { cellPos, premiumObj, cellPos02 } from './modules/cellPos.js';
 import { letters } from './modules/letters.js';
 // import { dragStartHandler } from './modules/drag.js';
 
@@ -6,31 +6,27 @@ import { letters } from './modules/letters.js';
 const board = document.querySelector('#board'); // currently not in use
 const cellWrap = document.querySelector('.cell-wrap');
 const slotWrap = document.querySelector('.slot-wrap');
-const boardSize = 15;
+const size = 15;
 const numTiles = 7;
 
 
 // array of letters for testing
 const arr = ['D', 'I', 'O', 'J', 'O', 'J', 'O'];
 const ltr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const ltrs = Object.keys(letters)
 
 
 //
 
-function createBoard(size) {
+function createBoard() {
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
       const div = document.createElement('div');
       div.classList.add('cell', 'dropzone');
-      div.setAttribute('data-row', i);
-      div.setAttribute('data-col', j);
       div.id = `${i}${j}`;
       cellWrap.appendChild(div);
       cellWrap.style.gridTemplateColumns = `repeat(${size}, auto)`;
 
-      // div.style.position = 'absolute'
-      // NOTE: Loop & rename ID to eg. 00,01,02,etc or a1,a2...d5,d6,etc.
-      // div.id = `cl${i}`
       // cellWrap.style.width = `${29*size}px`
       // cellWrap.style.height = `${29*size}px`
     }
@@ -46,7 +42,7 @@ function createBoard(size) {
           cell[i].classList.add('premium');
         } if (cellPos[i] == key) {
           cell[i].style.backgroundColor = premiumObj[key].color;
-          cell[i].textContent = premiumObj[key].name;
+          // cell[i].textContent = premiumObj[key].name;
           cell[i].classList.add(premiumObj[key].name);
 
           // console.log(`i: ${i}, key: ${key},
@@ -67,18 +63,34 @@ function createBoard(size) {
   premiumStyles();
 
 
+  // function slots() {
+  //   for (let i = 0; i < 7; i++) {
+  //     const slot = document.createElement('div');
+  //     slot.classList.add('slot');
+  //     slot.id = `cl${i + size * size}`;
+  //     slotWrap.appendChild(slot);
+  //     slot.setAttribute('draggable', true);
+  //     const randomLtr = ltr[Math.floor(Math.random() * ltr.length)];
+  //     slot.textContent = randomLtr;
+  //     // slotWrap.style.gridTemplateColumns = `repeat(${size}, auto)`
+  //   }
+  // }
+
+  // slots();
+
+
   function slots() {
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < numTiles; i++) {
       const slot = document.createElement('div');
-      slot.classList.add('slot');
-      slot.id = `cl${i + size * size}`;
+      const tiles = document.createElement('div');
+      slot.classList.add('slot', 'dropzone');
+      tiles.classList.add('tiles')
+      tiles.id = `cl${i + size * size}`;
       slotWrap.appendChild(slot);
-      slot.setAttribute('draggable', true);
-      const randomLtr = ltr[Math.floor(Math.random() * ltr.length)];
-      slot.textContent = randomLtr;
-      // slotWrap.style.gridTemplateColumns = `repeat(${size}, auto)`
-      // slotWrap.style.width = `${29*size}px`
-      // slotWrap.style.height = `${29*size}px`
+      slot.appendChild(tiles)
+      tiles.setAttribute('draggable', true);
+      const randomLtr = ltrs[Math.floor(Math.random() * ltrs.length)].toUpperCase();
+      tiles.textContent = randomLtr;
     }
   }
 
@@ -86,7 +98,8 @@ function createBoard(size) {
 }
 
 
-createBoard(boardSize);
+createBoard();
+
 
 
 function clickAttacher(selector, cn) {
@@ -106,13 +119,12 @@ clickAttacher('.slot', 'active');
 // improve this function??? improve all the funcs lololol
 function startClick() {
   const btnStart = document.querySelector('.btnStart');
-  const slot = document.querySelectorAll('.slot');
-  // const slotWrap = document.querySelector('.slot-wrap');
+  const tiles = document.querySelectorAll('.tiles');
 
-  for (const s of slot) {
+  for (const t of tiles) {
     btnStart.addEventListener('click', () => {
       btnStart.textContent = 'SET';
-      s.style.visibility = 'visible';
+      t.style.visibility = 'visible';
       console.log('clicked');
     });
   }
@@ -131,16 +143,21 @@ startClick();
 
 function shuffleClick() {
   const btnShuffle = document.querySelector('#btnShuffle');
-  const slot = document.querySelectorAll('.slot');
+  const tiles = document.querySelectorAll('.tiles');
 
 
   btnShuffle.addEventListener('click', () => {
-    for (const s of slot) {
-      const randomLtr = ltr[Math.floor(Math.random() * ltr.length)];
-      s.textContent = randomLtr;
+    for (const t of tiles) {
+      if (t.parentElement.classList.contains('slot')) {
+        const randomLtr = ltrs[Math.floor(Math.random() * ltrs.length)].toUpperCase();
+        t.textContent = randomLtr;
         console.log('clicked')
       }
+
+
+      }
     });
+
 
   // btnShuffle.addEventListener('click', () => {
   //   for (const s of slot) {
@@ -168,6 +185,72 @@ function shuffleClick() {
 shuffleClick();
 
 
+
+
+
+function shuffleBoard() {
+  const shuffleBoard = document.querySelector('#shuffleBoard');
+  const cell = document.querySelectorAll('.cell');
+
+  shuffleBoard.addEventListener('click', () => {
+
+
+    
+    for (let i = 0; i < 15 * 15; i++) {
+      const shuffled = cellPos.sort(() => Math.random() - 0.5)
+
+      for (const key in premiumObj) {
+        if (shuffled[i] !== 0) {
+          cell[i].classList.add('premium');
+        } if (shuffled[i] == key) {
+          cell[i].style.backgroundColor = premiumObj[key].color;
+          // cell[i].textContent = premiumObj[key].name;
+          cell[i].classList.add(premiumObj[key].name);
+
+        }
+      }
+    }
+
+    });
+
+  // shuffleBoard.addEventListener('click', () => testran());
+  // function testran() {
+  //   for (let i = 0; i < 15 * 15; i++) {
+  //     for (const key in premiumObj) {
+  //       if (shuffled[i] !== 0) {
+  //         cell[i].classList.add('premium');
+  //       } if (shuffled[i] == key) {
+  //         cell[i].style.backgroundColor = premiumObj[key].color;
+  //         cell[i].textContent = premiumObj[key].name;
+  //         cell[i].classList.add(premiumObj[key].name);
+  //       }
+  //     }
+  //   }
+  // }
+
+
+
+
+
+
+
+    // button.addEventListener("click", () => generateRandomPicture(imageArray));
+
+    // function generateRandomPicture(array){
+    //   let randomNum = Math.floor(Math.random() * array.length); 
+    //   image.setAttribute("src", array[randomNum]);}
+
+
+
+
+
+
+}
+
+shuffleBoard();
+
+
+
 function dragStartHandler(e) {
   const data = e.target.id;
   e.dataTransfer.setData('text/plain', data);
@@ -180,12 +263,16 @@ function dragOverHandler(e) {
 function dropHandler(e) {
   const data = e.dataTransfer.getData('text/plain');
   const dragged = document.getElementById(data);
-  // dragged.style.right = `${0}px`
-  dragged.style.opacity = `${80}%`;
 
 
-  e.currentTarget.append(dragged);
-  dragged.style.position = 'absolute'
+
+  if (!e.currentTarget.hasChildNodes()) {
+    e.currentTarget.append(dragged);
+    dragged.style.position = 'absolute';
+    // dragged.style.opacity = `${80}%`;
+  }
+
+
 
 
 }
@@ -202,8 +289,13 @@ for (const div of divs) {
 }
 
 
-// NOTES: export/import drag function/s
-//        stop special cells text being pushed out after drap/drop
-//        fix cell-wrapper from vanishing after drag and drop
-//        edit cell ids / adjust dropzone to cell-wrapper only..if possible
-//        have a look at z-index for positioning
+// NOTES:
+// export/import drag function/s
+//stop special cells text being pushed out after drap/drop DONE
+//fix cell-wrapper from vanishing after drag and drop DONE
+//have a look at z-index for positioning DONE
+//fix hasChildNodes for speciel cells, how to drop only once DONE
+//edit cell ids / adjust dropzone to cell-wrapper only..if possible
+//fix drag & drop for special cells with childNode, textcontent
+// clear board after every shuffleboard click
+// fix > if tile on board, do NOT shuffle
