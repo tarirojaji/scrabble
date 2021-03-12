@@ -1,5 +1,5 @@
-import { cellPos, premiumObj, cellPos02 } from './modules/cellPos.js';
-import { letters } from './modules/letters.js';
+import { cellPos, specialObj, cellPos02 } from './modules/cellPos.js';
+import { letters, ltrArr, ltrsRemaining } from './modules/letters.js';
 // import { dragStartHandler } from './modules/drag.js';
 
 
@@ -11,9 +11,9 @@ const numTiles = 7;
 
 
 // array of letters for testing
-const arr = ['D', 'I', 'O', 'J', 'O', 'J', 'O'];
-const ltr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const ltrs = Object.keys(letters)
+// const arr = ['D', 'I', 'O', 'J', 'O', 'J', 'O'];
+// const ltr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const ltrs = Object.keys(letters) //replace with Array of letters with n  each
 
 
 //
@@ -27,26 +27,23 @@ function createBoard() {
       cellWrap.appendChild(div);
       cellWrap.style.gridTemplateColumns = `repeat(${size}, auto)`;
 
-      // cellWrap.style.width = `${29*size}px`
-      // cellWrap.style.height = `${29*size}px`
     }
   }
 
-
-  function premiumStyles() {
+  function specialCells() {
     const cell = document.querySelectorAll('.cell');
 
     for (let i = 0; i < size * size; i++) {
-      for (const key in premiumObj) {
+      for (const key in specialObj) {
         if (cellPos[i] !== 0) {
-          cell[i].classList.add('premium');
+          cell[i].classList.add('special');
         } if (cellPos[i] == key) {
-          cell[i].style.backgroundColor = premiumObj[key].color;
-          // cell[i].textContent = premiumObj[key].name;
-          cell[i].classList.add(premiumObj[key].name);
+          cell[i].style.backgroundColor = specialObj[key].color;
+          // cell[i].textContent = specialObj[key].name;
+          cell[i].classList.add(specialObj[key].name);
 
           // console.log(`i: ${i}, key: ${key},
-          // board name: ${cellPos[i]}, ${premiumObj[key].name}`);
+          // board name: ${cellPos[i]}, ${specialObj[key].name}`);
         }
       }
     }
@@ -60,7 +57,7 @@ function createBoard() {
 
   }
 
-  premiumStyles();
+  specialCells();
 
 
   // function slots() {
@@ -80,25 +77,36 @@ function createBoard() {
 
 
   function slots() {
+    // let rack = []
     for (let i = 0; i < numTiles; i++) {
       const slot = document.createElement('div');
       const tiles = document.createElement('div');
+
       slot.classList.add('slot', 'dropzone');
       tiles.classList.add('tiles')
       tiles.id = `cl${i + size * size}`;
+
       slotWrap.appendChild(slot);
       slot.appendChild(tiles)
       tiles.setAttribute('draggable', true);
-      const randomLtr = ltrs[Math.floor(Math.random() * ltrs.length)].toUpperCase();
+
+      // const randomLtr = ltrs[Math.floor(Math.random() * ltrs.length)].toUpperCase();
+      const randomLtr = ltrArr[Math.floor(Math.random() * ltrArr.length)].toUpperCase();
       tiles.textContent = randomLtr;
+
+      // for (const r of rack) {
+      //   tiles.textContent = r;
+      // }
+
     }
   }
 
   slots();
 }
 
-
+// INIT FUNCTIONS
 createBoard();
+ltrsRemaining();
 
 
 
@@ -145,7 +153,6 @@ function shuffleClick() {
   const btnShuffle = document.querySelector('#btnShuffle');
   const tiles = document.querySelectorAll('.tiles');
 
-
   btnShuffle.addEventListener('click', () => {
     for (const t of tiles) {
       if (t.parentElement.classList.contains('slot')) {
@@ -153,8 +160,6 @@ function shuffleClick() {
         t.textContent = randomLtr;
         console.log('clicked')
       }
-
-
       }
     });
 
@@ -192,20 +197,27 @@ function shuffleBoard() {
   const shuffleBoard = document.querySelector('#shuffleBoard');
   const cell = document.querySelectorAll('.cell');
 
+
+
   shuffleBoard.addEventListener('click', () => {
 
+    // First clear the baord
+    for (const c of cell) {
+      c.classList.remove('special')
+      c.style.backgroundColor = '';
+    }
 
-    
     for (let i = 0; i < 15 * 15; i++) {
+      // randomize cell coordinates
       const shuffled = cellPos.sort(() => Math.random() - 0.5)
 
-      for (const key in premiumObj) {
+      for (const key in specialObj) {
         if (shuffled[i] !== 0) {
-          cell[i].classList.add('premium');
+          cell[i].classList.add('special');
         } if (shuffled[i] == key) {
-          cell[i].style.backgroundColor = premiumObj[key].color;
-          // cell[i].textContent = premiumObj[key].name;
-          cell[i].classList.add(premiumObj[key].name);
+          cell[i].style.backgroundColor = specialObj[key].color;
+          // cell[i].textContent = specialObj[key].name;
+          cell[i].classList.add(specialObj[key].name);
 
         }
       }
@@ -216,13 +228,13 @@ function shuffleBoard() {
   // shuffleBoard.addEventListener('click', () => testran());
   // function testran() {
   //   for (let i = 0; i < 15 * 15; i++) {
-  //     for (const key in premiumObj) {
+  //     for (const key in specialObj) {
   //       if (shuffled[i] !== 0) {
-  //         cell[i].classList.add('premium');
+  //         cell[i].classList.add('special');
   //       } if (shuffled[i] == key) {
-  //         cell[i].style.backgroundColor = premiumObj[key].color;
-  //         cell[i].textContent = premiumObj[key].name;
-  //         cell[i].classList.add(premiumObj[key].name);
+  //         cell[i].style.backgroundColor = specialObj[key].color;
+  //         cell[i].textContent = specialObj[key].name;
+  //         cell[i].classList.add(specialObj[key].name);
   //       }
   //     }
   //   }
@@ -287,6 +299,18 @@ const divs = document.querySelectorAll('div');
 for (const div of divs) {
   div.addEventListener('dragstart', dragStartHandler);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // NOTES:

@@ -37,7 +37,7 @@ const cellPos02 = [
 ];
 
 
-const premiumObj = {
+const specialObj = {
   1: {
     name: 'DL',
     color: '#5c77a1',
@@ -68,4 +68,4 @@ const premiumObj = {
   },
 };
 
-export { cellPos, premiumObj, cellPos02};
+export { cellPos, specialObj, cellPos02};

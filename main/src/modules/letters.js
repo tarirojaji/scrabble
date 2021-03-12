@@ -1,129 +1,140 @@
 
 export let letters = {
     a: {
-      tiles: 10,
-      value: 1
+      num: 9,
+      points: 1
     },
     b: {
-      tiles: 2,
-      value: 4
+      num: 2,
+      points: 4
     },
     c: {
-      tiles: 2,
-      value: 4
+      num: 2,
+      points: 4
     }, 
     d: {
-      tiles: 5,
-      value: 2
+      num: 4,
+      points: 2
     }, 
     e: {
-      tiles: 12,
-      value: 1
+      num: 12,
+      points: 1
     }, 
     f: {
-      tiles: 2,
-      value: 4
+      num: 2,
+      points: 4
     },  
     g: {
-      tiles: 3,
-      value: 3
+      num: 3,
+      points: 3
     }, 
     h: {
-      tiles: 4,
-      value: 3
+      num: 2,
+      points: 3
     },
     i: {
-      tiles: 9,
-      value: 1
+      num: 9,
+      points: 1
     },
     j: {
-      tiles: 1,
-      value: 10
+      num: 1,
+      points: 10
     },
     k: {
-      tiles: 1,
-      value: 5
+      num: 1,
+      points: 5
     },
     l: {
-      tiles: 4,
-      value: 1
+      num: 4,
+      points: 1
     },
-    l: {
-      tiles: 4,
-      value: 1
-    },  
     m: {
-      tiles: 2,
-      value: 3
+      num: 2,
+      points: 1
     },  
     n: {
-      tiles: 5,
-      value: 2
-    },
-    n: {
-      tiles: 5,
-      value: 2
-    },
+      num: 6,
+      points: 3
+    },  
     o: {
-      tiles: 6,
-      value: 1
+      num: 8,
+      points: 2
     },
-    
     p: {
-      tiles: 2,
-      value: 4
+      num: 2,
+      points: 2
     },
-    
     q: {
-      tiles: 1,
-      value: 10
+      num: 1,
+      points: 1
     },
     r: {
-      tiles: 6,
-      value: 1
+      num: 6,
+      points: 4
     },
-  
     s: {
-      tiles: 5,
-      value: 1
+      num: 4,
+      points: 10
     },
-  
     t: {
-      tiles: 7,
-      value: 1
+      num: 6,
+      points: 1
     },
-    
     u: {
-      tiles: 4,
-      value: 2
+      num: 4,
+      points: 1
     },
-    
     v: {
-      tiles: 2,
-      value: 4
+      num: 2,
+      points: 1
     },
-    
     w: {
-      tiles: 2,
-      value: 4
+      num: 2,
+      points: 2
     },
-    
     x: {
-      tiles: 1,
-      value: 4
+      num: 1,
+      points: 4
     },
-    
     y: {
-      tiles: 2,
-      value: 4
+      num: 2,
+      points: 4
     },
     z: {
-      tiles: 1,
-      value: 10
+      num: 1,
+      points: 4
     },
     '_': {
-      tiles: 2,
-      value: 0
+      num: 2,
+      points: 0
     }
   };
+
+
+export let ltrArr = []
+function bagTiles() {
+  for (const key in letters) {
+    // console.log(letters[key])
+   let num = letters[key].num
+   for (let i = 0; i < num; i++) {
+    //  console.log(key[i])
+     ltrArr.push(key)
+   }
+  }
+}
+bagTiles();
+
+export function ltrsRemaining() {
+  const bag = document.querySelector('.bag')
+  bag.textContent = `Letters Remaining: ${ltrArr.length}`
+}
+
+  
+
+
+
+
+
+
+
   
