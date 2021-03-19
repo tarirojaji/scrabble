@@ -6,11 +6,11 @@ export let letters = {
     },
     b: {
       num: 2,
-      points: 4
+      points: 3
     },
     c: {
       num: 2,
-      points: 4
+      points: 3
     }, 
     d: {
       num: 4,
@@ -26,11 +26,11 @@ export let letters = {
     },  
     g: {
       num: 3,
-      points: 3
+      points: 2
     }, 
     h: {
       num: 2,
-      points: 3
+      points: 4
     },
     i: {
       num: 9,
@@ -38,7 +38,7 @@ export let letters = {
     },
     j: {
       num: 1,
-      points: 10
+      points: 8
     },
     k: {
       num: 1,
@@ -50,31 +50,31 @@ export let letters = {
     },
     m: {
       num: 2,
-      points: 1
+      points: 3
     },  
     n: {
       num: 6,
-      points: 3
+      points: 1
     },  
     o: {
       num: 8,
-      points: 2
+      points: 1
     },
     p: {
       num: 2,
-      points: 2
+      points: 3
     },
     q: {
       num: 1,
-      points: 1
+      points: 10
     },
     r: {
       num: 6,
-      points: 4
+      points: 1
     },
     s: {
       num: 4,
-      points: 10
+      points: 1
     },
     t: {
       num: 6,
@@ -86,15 +86,15 @@ export let letters = {
     },
     v: {
       num: 2,
-      points: 1
+      points: 4
     },
     w: {
       num: 2,
-      points: 2
+      points: 4
     },
     x: {
       num: 1,
-      points: 4
+      points: 8
     },
     y: {
       num: 2,
@@ -102,7 +102,7 @@ export let letters = {
     },
     z: {
       num: 1,
-      points: 4
+      points: 10
     },
     '_': {
       num: 2,

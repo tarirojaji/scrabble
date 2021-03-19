@@ -319,7 +319,9 @@ for (const div of divs) {
 //fix cell-wrapper from vanishing after drag and drop DONE
 //have a look at z-index for positioning DONE
 //fix hasChildNodes for speciel cells, how to drop only once DONE
+// clear board after every shuffleboard click DONE
+
 //edit cell ids / adjust dropzone to cell-wrapper only..if possible
 //fix drag & drop for special cells with childNode, textcontent
-// clear board after every shuffleboard click
 // fix > if tile on board, do NOT shuffle
+// remove item from bag if in rack or board
