@@ -286,7 +286,6 @@ function dropHandler(e) {
 
 
 
-
 }
 
 const dropzones = document.querySelectorAll('.dropzone');

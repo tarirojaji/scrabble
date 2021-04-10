@@ -2,10 +2,11 @@
   "name": "scrabble",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "svr.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index"
+    "start": "node svr"
   },
   "author": "",
   "license": "ISC",
@@ -19,5 +20,8 @@
     "env": {
       "browser": true
     }
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
