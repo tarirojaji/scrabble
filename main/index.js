@@ -1,6 +1,6 @@
 import { cellPos, specialObj, cellPos02 } from './modules/cellPos.js';
 import { letters, ltrArr, ltrsRemaining } from './modules/letters.js';
-// import { dragStartHandler } from './modules/drag.js';
+import { drag } from './modules/drag.js';
 
 
 const board = document.querySelector('#board'); // currently not in use
@@ -263,41 +263,50 @@ shuffleBoard();
 
 
 
-function dragStartHandler(e) {
-  const data = e.target.id;
-  e.dataTransfer.setData('text/plain', data);
-}
-
-function dragOverHandler(e) {
-  e.preventDefault();
-}
-
-function dropHandler(e) {
-  const data = e.dataTransfer.getData('text/plain');
-  const dragged = document.getElementById(data);
+drag();
 
 
 
-  if (!e.currentTarget.hasChildNodes()) {
-    e.currentTarget.append(dragged);
-    dragged.style.position = 'absolute';
-    // dragged.style.opacity = `${80}%`;
-  }
 
 
 
-}
 
-const dropzones = document.querySelectorAll('.dropzone');
-for (const dropzone of dropzones) {
-  dropzone.addEventListener('dragover', dragOverHandler);
-  dropzone.addEventListener('drop', dropHandler);
-}
 
-const divs = document.querySelectorAll('div');
-for (const div of divs) {
-  div.addEventListener('dragstart', dragStartHandler);
-}
+// function dragStartHandler(e) {
+//   const data = e.target.id;
+//   e.dataTransfer.setData('text/plain', data);
+// }
+
+// function dragOverHandler(e) {
+//   e.preventDefault();
+// }
+
+// function dropHandler(e) {
+//   const data = e.dataTransfer.getData('text/plain');
+//   const dragged = document.getElementById(data);
+
+
+
+//   if (!e.currentTarget.hasChildNodes()) {
+//     e.currentTarget.append(dragged);
+//     dragged.style.position = 'absolute';
+//     // dragged.style.opacity = `${80}%`;
+//   }
+
+
+
+// }
+
+// const dropzones = document.querySelectorAll('.dropzone');
+// for (const dropzone of dropzones) {
+//   dropzone.addEventListener('dragover', dragOverHandler);
+//   dropzone.addEventListener('drop', dropHandler);
+// }
+
+// const divs = document.querySelectorAll('div');
+// for (const div of divs) {
+//   div.addEventListener('dragstart', dragStartHandler);
+// }
 
 
 

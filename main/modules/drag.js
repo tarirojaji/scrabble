@@ -1,7 +1,7 @@
-function dragStartHandler(e) {
+function drag() {
+  function dragStartHandler(e) {
   const data = e.target.id;
   e.dataTransfer.setData('text/plain', data);
-
 }
 
 function dragOverHandler(e) {
@@ -11,7 +11,17 @@ function dragOverHandler(e) {
 function dropHandler(e) {
   const data = e.dataTransfer.getData('text/plain');
   const dragged = document.getElementById(data);
-  e.currentTarget.append(dragged);
+
+
+
+  if (!e.currentTarget.hasChildNodes()) {
+    e.currentTarget.append(dragged);
+    dragged.style.position = 'absolute';
+    // dragged.style.opacity = `${80}%`;
+  }
+
+
+
 }
 
 const dropzones = document.querySelectorAll('.dropzone');
@@ -25,8 +35,6 @@ for (const div of divs) {
   div.addEventListener('dragstart', dragStartHandler);
 }
 
+}
 
-export { dragStartHandler, dragOverHandler, dropHandler, };
-
-
-// figure out how to import this files!
+export { drag }
