@@ -116,12 +116,15 @@ function bagTiles() {
   for (const key in letters) {
     // console.log(letters[key])
    let num = letters[key].num
+  //  let points = letters[key].points
    for (let i = 0; i < num; i++) {
     //  console.log(key[i])
-     ltrArr.push(key)
+    // console.log(points)
+    ltrArr.push(key)
    }
   }
 }
+// console.log(ltrArr);
 bagTiles();
 
 export function ltrsRemaining() {

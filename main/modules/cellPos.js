@@ -63,7 +63,7 @@ const specialObj = {
   },
   5: {
     name: '⭑',
-    color: '#a9687d',
+    color: '#ff033e',
     index: [112],
   },
 };

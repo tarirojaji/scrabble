@@ -1,6 +1,7 @@
 import { cellPos, specialObj, cellPos02 } from './modules/cellPos.js';
 import { letters, ltrArr, ltrsRemaining } from './modules/letters.js';
 import { drag } from './modules/drag.js';
+import { clickAttacher ,startClick, shuffleClick, shuffleBoard, setClick } from './modules/clicks.js'
 
 
 const board = document.querySelector('#board'); // currently not in use
@@ -10,13 +11,9 @@ const size = 15;
 const numTiles = 7;
 
 
-// array of letters for testing
-// const arr = ['D', 'I', 'O', 'J', 'O', 'J', 'O'];
 // const ltr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const ltrs = Object.keys(letters) //replace with Array of letters with n  each
 
-
-//
 
 function createBoard() {
   for (let i = 0; i < size; i++) {
@@ -108,215 +105,16 @@ function createBoard() {
 createBoard();
 ltrsRemaining();
 
-
-
-function clickAttacher(selector, cn) {
-  const elem = document.querySelectorAll(selector);
-  for (const e of elem) {
-    e.addEventListener('click', () => {
-      e.classList.toggle(cn);
-      console.log('clicked');
-    });
-  }
-}
-
-clickAttacher('.cell', 'active');
-clickAttacher('.slot', 'active');
-
-
-// improve this function??? improve all the funcs lololol
-function startClick() {
-  const btnStart = document.querySelector('.btnStart');
-  const tiles = document.querySelectorAll('.tiles');
-
-  for (const t of tiles) {
-    btnStart.addEventListener('click', () => {
-      btnStart.textContent = 'SET';
-      t.style.visibility = 'visible';
-      console.log('clicked');
-    });
-  }
-
-
-    // btnStart.addEventListener('click', () => {
-    //   btnStart.textContent = 'SET';
-    //   slotWrap.style.visibility = 'visible';
-    //   console.log('clicked');
-    // });
-
-}
-
-startClick();
-
-
-function shuffleClick() {
-  const btnShuffle = document.querySelector('#btnShuffle');
-  const tiles = document.querySelectorAll('.tiles');
-
-  btnShuffle.addEventListener('click', () => {
-    for (const t of tiles) {
-      if (t.parentElement.classList.contains('slot')) {
-        const randomLtr = ltrs[Math.floor(Math.random() * ltrs.length)].toUpperCase();
-        t.textContent = randomLtr;
-        console.log('clicked')
-      }
-      }
-    });
-
-
-  // btnShuffle.addEventListener('click', () => {
-  //   for (const s of slot) {
-  //     for (let i = arr.length - 1; i > 0; i--) {
-  //       const j = Math.floor(Math.random() * (i + 1));
-  //       [arr[i], arr[j]] = [arr[j], arr[i]];
-  //       s.textContent = arr[i]
-  //       console.log('clicked')
-  //     }
-  //   }
-  // });
-
-  // for (const s of slot) {
-  //   btnShuffle.addEventListener('click', () => {
-  //     for (let i = array.length - 1; i > 0; i--) {
-  //       const j = Math.floor(Math.random() * (i + 1));
-  //       [array[i], array[j]] = [array[j], array[i]];
-  //       s.textContent = arr[i]
-  //   }
-  //   });
-  // }
-
-}
-
-shuffleClick();
-
-
-
-
-
-function shuffleBoard() {
-  const shuffleBoard = document.querySelector('#shuffleBoard');
-  const cell = document.querySelectorAll('.cell');
-
-
-
-  shuffleBoard.addEventListener('click', () => {
-
-    // First clear the baord
-    for (const c of cell) {
-      c.classList.remove('special')
-      c.style.backgroundColor = '';
-    }
-
-    for (let i = 0; i < 15 * 15; i++) {
-      // randomize cell coordinates
-      const shuffled = cellPos.sort(() => Math.random() - 0.5)
-
-      for (const key in specialObj) {
-        if (shuffled[i] !== 0) {
-          cell[i].classList.add('special');
-        } if (shuffled[i] == key) {
-          cell[i].style.backgroundColor = specialObj[key].color;
-          // cell[i].textContent = specialObj[key].name;
-          cell[i].classList.add(specialObj[key].name);
-
-        }
-      }
-    }
-
-    });
-
-  // shuffleBoard.addEventListener('click', () => testran());
-  // function testran() {
-  //   for (let i = 0; i < 15 * 15; i++) {
-  //     for (const key in specialObj) {
-  //       if (shuffled[i] !== 0) {
-  //         cell[i].classList.add('special');
-  //       } if (shuffled[i] == key) {
-  //         cell[i].style.backgroundColor = specialObj[key].color;
-  //         cell[i].textContent = specialObj[key].name;
-  //         cell[i].classList.add(specialObj[key].name);
-  //       }
-  //     }
-  //   }
-  // }
-
-
-
-
-
-
-
-    // button.addEventListener("click", () => generateRandomPicture(imageArray));
-
-    // function generateRandomPicture(array){
-    //   let randomNum = Math.floor(Math.random() * array.length); 
-    //   image.setAttribute("src", array[randomNum]);}
-
-
-
-
-
-
-}
-
-shuffleBoard();
-
-
-
+// DRAG AND DROD
 drag();
 
-
-
-
-
-
-
-
-// function dragStartHandler(e) {
-//   const data = e.target.id;
-//   e.dataTransfer.setData('text/plain', data);
-// }
-
-// function dragOverHandler(e) {
-//   e.preventDefault();
-// }
-
-// function dropHandler(e) {
-//   const data = e.dataTransfer.getData('text/plain');
-//   const dragged = document.getElementById(data);
-
-
-
-//   if (!e.currentTarget.hasChildNodes()) {
-//     e.currentTarget.append(dragged);
-//     dragged.style.position = 'absolute';
-//     // dragged.style.opacity = `${80}%`;
-//   }
-
-
-
-// }
-
-// const dropzones = document.querySelectorAll('.dropzone');
-// for (const dropzone of dropzones) {
-//   dropzone.addEventListener('dragover', dragOverHandler);
-//   dropzone.addEventListener('drop', dropHandler);
-// }
-
-// const divs = document.querySelectorAll('div');
-// for (const div of divs) {
-//   div.addEventListener('dragstart', dragStartHandler);
-// }
-
-
-
-
-
-
-
-
-
-
+// CLICK FUNCTIONS:
+startClick();
+setClick();
+shuffleClick();
+clickAttacher('.cell', 'active');
+clickAttacher('.tiles', 'active');
+shuffleBoard();
 
 
 

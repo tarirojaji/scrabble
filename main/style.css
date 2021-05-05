@@ -45,6 +45,8 @@ header {
   /* background-color: teal; */
 }
 
+
+
 .board {
   display: flex;
   justify-content: center;
@@ -105,7 +107,7 @@ header {
 
 .special {
   /* background-color: #8196b8; */
-  /* font-size: 70%; */
+  font-size: 70%;
   text-align: center;
   color: white;
 }
@@ -160,7 +162,7 @@ header {
 .btn-wrap {
   display: flex;
   justify-content: center;
-  background-color: slateblue;
+  /* background-color: slateblue; */
 }
 
 /* make width of set btn static esp  */
@@ -171,13 +173,27 @@ button {
   margin: 0.5em;
   padding: 0 0.5em;
   background-color: #151B25;
+  /* background-color: white; */
+  border: 2px solid thistle;
   /* border-radius: 10px; */
   color: white;
+}
+
+button:hover {
+ background-color: skyblue;
 }
 
 .rules-wrap {
   background-color: grey;
   width: 10%;
+}
+
+header, button {
+
+  color: white;
+  -webkit-text-fill-color: black; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
 }
 
 
