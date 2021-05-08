@@ -1,10 +1,10 @@
-import { cellPos, specialObj, cellPos02 } from './modules/cellPos.js';
+import { cellPos, specialObj } from './modules/cellPos.js';
 import { letters, ltrArr, ltrsRemaining } from './modules/letters.js';
 import { drag } from './modules/drag.js';
-import { clickAttacher ,startClick, shuffleClick, shuffleBoard, setClick } from './modules/clicks.js'
+import { clickAttacher, startClick, shuffleClick, shuffleBoard, setClick } from './modules/clicks.js';
 
 
-const board = document.querySelector('#board'); // currently not in use
+// const board = document.querySelector('#board');
 const cellWrap = document.querySelector('.cell-wrap');
 const slotWrap = document.querySelector('.slot-wrap');
 const size = 15;
@@ -12,7 +12,7 @@ const numTiles = 7;
 
 
 // const ltr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const ltrs = Object.keys(letters) //replace with Array of letters with n  each
+const ltrs = Object.keys(letters);
 
 
 function createBoard() {
@@ -23,7 +23,6 @@ function createBoard() {
       div.id = `${i}${j}`;
       cellWrap.appendChild(div);
       cellWrap.style.gridTemplateColumns = `repeat(${size}, auto)`;
-
     }
   }
 
@@ -31,9 +30,11 @@ function createBoard() {
     const cell = document.querySelectorAll('.cell');
 
     for (let i = 0; i < size * size; i++) {
+      // eslint-disable-next-line no-restricted-syntax
       for (const key in specialObj) {
         if (cellPos[i] !== 0) {
           cell[i].classList.add('special');
+        // eslint-disable-next-line eqeqeq
         } if (cellPos[i] == key) {
           cell[i].style.backgroundColor = specialObj[key].color;
           // cell[i].textContent = specialObj[key].name;
@@ -51,7 +52,6 @@ function createBoard() {
     //   cell[i].textContent
     //   }
     // }
-
   }
 
   specialCells();
@@ -80,11 +80,11 @@ function createBoard() {
       const tiles = document.createElement('div');
 
       slot.classList.add('slot', 'dropzone');
-      tiles.classList.add('tiles')
+      tiles.classList.add('tiles');
       tiles.id = `cl${i + size * size}`;
 
       slotWrap.appendChild(slot);
-      slot.appendChild(tiles)
+      slot.appendChild(tiles);
       tiles.setAttribute('draggable', true);
 
       // const randomLtr = ltrs[Math.floor(Math.random() * ltrs.length)].toUpperCase();
@@ -94,7 +94,6 @@ function createBoard() {
       // for (const r of rack) {
       //   tiles.textContent = r;
       // }
-
     }
   }
 
@@ -117,17 +116,15 @@ clickAttacher('.tiles', 'active');
 shuffleBoard();
 
 
-
-
 // NOTES:
 // export/import drag function/s
-//stop special cells text being pushed out after drap/drop DONE
-//fix cell-wrapper from vanishing after drag and drop DONE
-//have a look at z-index for positioning DONE
-//fix hasChildNodes for speciel cells, how to drop only once DONE
+// stop special cells text being pushed out after drap/drop DONE
+// fix cell-wrapper from vanishing after drag and drop DONE
+// have a look at z-index for positioning DONE
+// fix hasChildNodes for speciel cells, how to drop only once DONE
 // clear board after every shuffleboard click DONE
 
-//edit cell ids / adjust dropzone to cell-wrapper only..if possible
-//fix drag & drop for special cells with childNode, textcontent
+// edit cell ids / adjust dropzone to cell-wrapper only..if possible
+// fix drag & drop for special cells with childNode, textcontent
 // fix > if tile on board, do NOT shuffle
 // remove item from bag if in rack or board
