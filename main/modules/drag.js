@@ -2,18 +2,9 @@ import { letters } from './letters.js';
 
 function drag() {
   const pointsCal = document.querySelector('.points');
-  const parr = new Set();
-  const idarr = new Set();
-  const p = [];
-  let pnt = 0;
 
-  const score = 0;
-  const test = [];
 
   const map = new Map();
-
-
-  const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
 
   function dragStartHandler(e) {
@@ -43,67 +34,28 @@ function drag() {
     // console.log(dragged.textContent.toLowerCase())
     }
 
-    // for (const key in letters) {
-    //   if (dragged.textContent.toLowerCase() == key) {
 
-    //     points += letters[key].points
-    //     console.log(points);
-    //     pointsCal.textContent = `Points: ${points}`
-
-    //   }
-    // }
-
+    // eslint-disable-next-line no-restricted-syntax
     for (const key in letters) {
       // eslint-disable-next-line eqeqeq
       if (dragged.textContent.toLowerCase() == key) {
       // console.log(dragged.id);
 
-        const points = letters[key].points;
-
-        parr.add(`${dragged.id}: ${points}`);
-        console.log(parr);
-
-        for (const i of parr) {
-        // console.log(i);
-        // pnt += parseInt(i.charAt(i.length-1));
-          pnt = eval(i.charAt(i.length-1));
-        }
-        console.log(pnt);
-        p.push(pnt);
-        // console.log(p);
-
-        pointsCal.textContent = `Points: ${p.reduce(reducer)}`;
-
+        // const points = letters[key].points;
 
         map.set(dragged.id, letters[key].points);
+
+        let total = 0;
+        map.forEach((value) => {
+          total += value;
+        });
+
+        console.log(`${total} total!`);
         console.log(map);
 
-
-        // let o = [{
-        //   i: letters[key].points
-        // }]
-
-
-        // let uni = [...new Set(o.map(item => item.i))];
-        // console.log(uni)
-
-        // console.log(idarr);
-
-        // idarr.add(dragged.id)
-        // console.log(idarr);
-        // if(idarr.has(dragged.id) == true) {
-        //   points += letters[key].points
-        //   // parr.push(points)
-        //   // console.log(points);
-        // }
-
-
-        // pointsCal.textContent = `Points: ${points}`
-        // pointsCal.textContent = `Points: ${pnt}`
+        pointsCal.textContent = `Points: ${total}`;
       }
     }
-
-    // console.log(parr);
   }
 
   const dropzones = document.querySelectorAll('.dropzone');
