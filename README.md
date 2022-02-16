@@ -1,5 +1,9 @@
 # scrabble
 
+### Screenshot
+
+![Screenshot](./scrabble.png)
+
 # References
 
 portsoc/ws_drag. (n.d.). GitHub.
